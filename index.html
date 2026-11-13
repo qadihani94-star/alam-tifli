@@ -1,1 +1,127 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عالم طفلي</title>
+<style>
+body {
+ margin:0;
+ font-family:Arial,sans-serif;
+ text-align:center;
+ background:linear-gradient(135deg,#fff0d9,#d9f5ff);
+ color:#333;
+}
+header {
+ background:#ffb84d;
+ padding:20px;
+ border-radius:0 0 30px 30px;
+}
+h1 {color:#693b13}
+.lion {font-size:100px;margin:15px}
+h2 {color:#59408b}
+.buttons {
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ padding:15px;
+}
+button {
+ border:0;
+ border-radius:20px;
+ padding:20px 10px;
+ font-size:20px;
+ background:white;
+ box-shadow:0 3px 8px #bbb;
+ cursor:pointer;
+}
+button:active {transform:scale(.96)}
+#lesson {
+ background:white;
+ margin:15px;
+ padding:25px;
+ border-radius:25px;
+ min-height:130px;
+}
+#item {font-size:65px;color:#ff8b36}
+#word {font-size:25px}
+</style>
+</head>
+<body>
+<header>
+<h1>🌟 عالم طفلي 🌟</h1>
+<div class="lion">🦁</div>
+<h2>مرحباً! أنا لولو</h2>
+<p>هيا نتعلم ونلعب معاً ❤️</p>
+</header>
+
+<h2>اختر درساً يا بطل</h2>
+<div class="buttons">
+<button onclick="start('letters')">🔤 الحروف</button>
+<button onclick="start('numbers')">🔢 الأرقام</button>
+<button onclick="start('colors')">🎨 الألوان</button>
+<button onclick="start('english')">🇬🇧 English</button>
+</div>
+
+<div id="lesson">
+<h2>أهلاً بك في عالم لولو</h2>
+<div id="item">🦁</div>
+<div id="word">اضغط على أحد الدروس لنبدأ!</div>
+</div>
+
+<button onclick="next()">التالي ⭐</button>
+<button onclick="speak()">🔊 اسمعني</button>
+
+<script>
+let lessons = {
+letters:[
+["أ","أسد"],["ب","بطة"],["ت","تفاح"],
+["ث","ثعلب"],["ج","جمل"],["ح","حصان"]
+],
+numbers:[
+["١","واحد"],["٢","اثنان"],["٣","ثلاثة"],
+["٤","أربعة"],["٥","خمسة"],["٦","ستة"]
+],
+colors:[
+["🔴","أحمر"],["🔵","أزرق"],["🟢","أخضر"],
+["🟡","أصفر"],["🟣","بنفسجي"]
+],
+english:[
+["A","Apple"],["B","Ball"],["C","Cat"],
+["D","Dog"],["E","Elephant"]
+]
+};
+let current=[];
+let index=0;
+function start(type){
+ current=lessons[type];
+ index=0;
+ show();
+}
+function show(){
+ document.getElementById("item").innerText=current[index][0];
+ document.getElementById("word").innerText=current[index][1];
+ speak();
+}
+function next(){
+ if(current.length===0){
+ alert("اختر درساً أولاً يا بطل!");
+ return;
+ }
+ index=(index+1)%current.length;
+ show();
+}
+function speak(){
+ let word=document.getElementById("word").innerText;
+ if("speechSynthesis" in window){
+ speechSynthesis.cancel();
+ let msg=new SpeechSynthesisUtterance(word);
+ msg.lang="ar-SA";
+ speechSynthesis.speak(msg);
+ }
+}
+</script>
+</body>
+</html>
+
