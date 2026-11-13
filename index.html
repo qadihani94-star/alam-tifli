@@ -124,6 +124,119 @@ function speak(){
  }
 }
 </script>
+ 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>عالم طفلي - لولو</title>
+<style>
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  background:linear-gradient(135deg,#fff0c9,#d9f5ff);
+  color:#34445b;
+}
+header {
+  background:#ffca65;
+  padding:25px 10px;
+}
+h1 {font-size:30px}
+.lion {font-size:85px}
+.card {
+  background:white;
+  padding:20px;
+  margin:16px auto;
+  border-radius:22px;
+  max-width:420px;
+  box-shadow:0 4px 12px #0002;
+}
+button {
+  border:0;
+  border-radius:15px;
+  padding:15px;
+  margin:6px;
+  background:#35b99c;
+  color:white;
+  font-size:21px;
+  cursor:pointer;
+}
+button:active {transform:scale(.95)}
+#result {
+  font-size:30px;
+  color:#e58c30;
+  min-height:45px;
+}
+footer {padding:20px}
+</style>
+</head>
+<body>
+
+<header>
+<div class="lion">🦁</div>
+<h1>🌟 عالم طفلي 🌟</h1>
+<h2>أنا لولو! هيا نتعلم ونلعب</h2>
+</header>
+
+<div class="card">
+<h2>🔤 تعلم الحروف</h2>
+<button onclick="show('أ - أسد 🦁')">أ</button>
+<button onclick="show('ب - بطة 🦆')">ب</button>
+<button onclick="show('ت - تفاحة 🍎')">ت</button>
+</div>
+
+<div class="card">
+<h2>🔢 تعلم الأرقام</h2>
+<button onclick="show('واحد 1')">1</button>
+<button onclick="show('اثنان 2')">2</button>
+<button onclick="show('ثلاثة 3')">3</button>
+</div>
+
+<div class="card">
+<h2>🎨 تعلم الألوان</h2>
+<button onclick="show('أحمر ❤️')">أحمر</button>
+<button onclick="show('أزرق 💙')">أزرق</button>
+<button onclick="show('أخضر 💚')">أخضر</button>
+</div>
+
+<div class="card">
+<h2>🐾 تعلم الحيوانات</h2>
+<button onclick="show('أسد 🦁')">أسد</button>
+<button onclick="show('قطة 🐱')">قطة</button>
+<button onclick="show('أرنب 🐰')">أرنب</button>
+</div>
+
+<div class="card">
+<h2>⭐ لولو يقول</h2>
+<p id="result">اضغط على أي درس لنبدأ!</p>
+<button onclick="speak()">🔊 استمع</button>
+</div>
+
+<footer>
+❤️ صنع بحب للأطفال
+<p>عالم طفلي التعليمي</p>
+</footer>
+
+<script>
+function show(value) {
+ document.getElementById('result').innerText=value;
+}
+function speak() {
+ let t=document.getElementById('result').innerText;
+ if ('speechSynthesis' in window) {
+  let m=new SpeechSynthesisUtterance(t);
+  m.lang='ar-SA';
+  speechSynthesis.cancel();
+  speechSynthesis.speak(m);
+ }
+}
+</script>
 </body>
+</html>
+
+</body>
+
 </html>
 
