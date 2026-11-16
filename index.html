@@ -64,7 +64,62 @@ button:active {transform:scale(.96)}
 footer {padding:25px;color:#765}
 </style>
 </head>
+<section id="quiz-game" dir="rtl" style="background:#fff1d6;padding:25px;border-radius:20px;margin:20px;">
+  <h2>⭐ اختبر ذكاءك يا بطل</h2>
+  <h3 id="quiz-question">ما هو الحرف الأول من كلمة أسد؟</h3>
+  <div id="quiz-options">
+    <button onclick="answerQuiz('أ')">أ</button>
+    <button onclick="answerQuiz('ب')">ب</button>
+    <button onclick="answerQuiz('ت')">ت</button>
+  </div>
+  <h3 id="quiz-result">اختر الإجابة الصحيحة</h3>
+  <p>⭐ نقاطك: <span id="quiz-score">0</span></p>
+  <button onclick="nextQuiz()">السؤال التالي ➡️</button>
+</section>
 
+<script>
+const quizQuestions = [
+ {q:"ما أول حرف في كلمة أسد؟",a:"أ",o:["أ","ب","ت"]},
+ {q:"ما أول حرف في كلمة بيت؟",a:"ب",o:["ج","ب","د"]},
+ {q:"ما أول حرف في كلمة تفاح؟",a:"ت",o:["ت","ث","ن"]},
+ {q:"ما أول حرف في كلمة جمل؟",a:"ج",o:["ح","خ","ج"]},
+ {q:"ما أول حرف في كلمة حصان؟",a:"ح",o:["خ","ح","ج"]}
+];
+let quizIndex=0;
+let quizPoints=0;
+let quizAnswered=false;
+
+function showQuiz(){
+ let q=quizQuestions[quizIndex];
+ document.getElementById("quiz-question").textContent=q.q;
+ document.getElementById("quiz-result").textContent="اختر الإجابة الصحيحة";
+ document.getElementById("quiz-options").innerHTML="";
+ quizAnswered=false;
+ q.o.forEach(letter=>{
+  let b=document.createElement("button");
+  b.textContent=letter;
+  b.style.cssText="font-size:25px;padding:12px 22px;margin:8px;border-radius:12px;background:white;border:2px solid #e8b85b";
+  b.onclick=()=>answerQuiz(letter);
+  document.getElementById("quiz-options").appendChild(b);
+ });
+}
+function answerQuiz(letter){
+ if(quizAnswered)return;
+ quizAnswered=true;
+ if(letter===quizQuestions[quizIndex].a){
+  quizPoints++;
+  document.getElementById("quiz-result").textContent="أحسنت! ⭐ إجابة صحيحة";
+ }else{
+  document.getElementById("quiz-result").textContent="حاول مرة أخرى في السؤال القادم ❤️";
+ }
+ document.getElementById("quiz-score").textContent=quizPoints;
+}
+function nextQuiz(){
+ quizIndex=(quizIndex+1)%quizQuestions.length;
+ showQuiz();
+}
+showQuiz();
+</script>
 <body>
 
 <header>
